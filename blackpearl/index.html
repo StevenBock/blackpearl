@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Black Pearl: A Vigil</title>
+    <style>
+        /* ⚙️ EASY CONFIGURATION - Change this to false when it falls! */
+        :root {
+            --still-standing: 1; /* 1 = YES, 0 = NO */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            animation: backgroundShift 10s ease infinite;
+        }
+
+        body.fallen {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            animation: stormyBackground 8s ease infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes stormyBackground {
+            0%, 100% { filter: brightness(0.7); }
+            50% { filter: brightness(0.5); }
+        }
+
+        .waves {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 1;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='rgba(255,255,255,0.1)'/%3E%3C/svg%3E");
+            background-size: 50% 100%;
+            animation: wave 10s linear infinite;
+        }
+
+        .wave:nth-child(2) {
+            animation-delay: -5s;
+            opacity: 0.5;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+            animation: fadeInDown 1s ease;
+            letter-spacing: 2px;
+            font-weight: normal;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .image-container {
+            margin: 2rem auto;
+            max-width: 600px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: fadeIn 1.5s ease 0.3s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        body.fallen .image-container {
+            filter: grayscale(1) brightness(0.7);
+        }
+
+        .answer {
+            font-size: clamp(6rem, 15vw, 12rem);
+            font-weight: bold;
+            margin: 2rem 0;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            animation: dramaticEntrance 1s ease 0.6s backwards;
+            position: relative;
+        }
+
+        .answer.yes {
+            color: #FFD700;
+            text-shadow:
+                0 0 10px #FFD700,
+                0 0 20px #FFD700,
+                0 0 40px #FFA500,
+                3px 3px 6px rgba(0,0,0,0.5);
+            animation: dramaticEntrance 1s ease 0.6s backwards, pulse 2s ease infinite;
+        }
+
+        .answer.no {
+            color: #ff4444;
+            text-shadow:
+                0 0 10px #ff0000,
+                0 0 20px #ff0000,
+                0 0 40px #cc0000,
+                3px 3px 6px rgba(0,0,0,0.5);
+            animation: dramaticEntrance 1s ease 0.6s backwards, shake 0.5s ease infinite;
+        }
+
+        @keyframes dramaticEntrance {
+            from {
+                opacity: 0;
+                transform: scale(0.5) rotate(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px) rotate(-1deg); }
+            75% { transform: translateX(5px) rotate(1deg); }
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: rgba(255,255,255,0.9);
+            margin-top: 1rem;
+            animation: fadeIn 1s ease 1s backwards;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        body.fallen .subtitle {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 120px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            z-index: 10;
+            animation: fadeIn 1s ease 1.5s backwards;
+        }
+
+        @media (max-width: 768px) {
+            .answer {
+                font-size: clamp(4rem, 20vw, 6rem);
+                letter-spacing: 5px;
+            }
+
+            .image-container {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="waves">
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Does The Black Pearl Still Stand?</h1>
+
+        <div class="image-container">
+            <img src="blackpearl.webp" alt="The Black Pearl - A house on the edge">
+        </div>
+
+        <div class="answer" id="answer"></div>
+
+        <div class="subtitle" id="subtitle"></div>
+    </div>
+
+    <div class="footer">A Vigil · Est. 2025</div>
+
+    <script>
+        // 🏖️ CONFIGURATION: Change STILL_STANDING to false when the house falls into the ocean!
+        const STILL_STANDING = true;
+
+        const answerElement = document.getElementById('answer');
+        const subtitleElement = document.getElementById('subtitle');
+
+        if (STILL_STANDING) {
+            document.body.classList.remove('fallen');
+            answerElement.textContent = 'YES';
+            answerElement.classList.add('yes');
+            subtitleElement.innerHTML = 'Against all odds, it defies the ocean.<br>Standing proud, one more day.';
+        } else {
+            document.body.classList.add('fallen');
+            answerElement.textContent = 'NO';
+            answerElement.classList.add('no');
+            subtitleElement.innerHTML = 'The ocean has claimed its prize.<br>The Black Pearl has fallen.<br><br>🌊 Rest in Pieces 🏚️';
+        }
+    </script>
+</body>
+</html>
