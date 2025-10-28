@@ -25,12 +25,12 @@
             justify-content: center;
             overflow: hidden;
             position: relative;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #0891b2 50%, #06b6d4 100%);
             animation: backgroundShift 10s ease infinite;
         }
 
         body.fallen {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
             animation: stormyBackground 8s ease infinite;
         }
 
@@ -191,6 +191,26 @@
             color: rgba(255,255,255,0.7);
         }
 
+        .poem {
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            color: rgba(255,255,255,0.85);
+            margin-top: 2.5rem;
+            padding: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeIn 1s ease 1.5s backwards;
+            line-height: 1.8;
+            font-style: italic;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            border-left: 3px solid rgba(255,255,255,0.3);
+        }
+
+        body.fallen .poem {
+            color: rgba(255,255,255,0.6);
+        }
+
         .footer {
             position: fixed;
             bottom: 120px;
@@ -228,9 +248,29 @@
         <div class="answer" id="answer"></div>
 
         <div class="subtitle" id="subtitle"></div>
+
+        <div class="poem">
+            Condemned, they said, a year ago,<br>
+            Too close to where the wild waves flow.<br>
+            The engineers shook their heads in doubt,<br>
+            "Any day now, it's going out."<br>
+            <br>
+            But stubborn boards and weathered beams<br>
+            Laugh at the ocean's watery schemes.<br>
+            Each storm that comes with fury's call<br>
+            Swears this will be the final fall.<br>
+            <br>
+            Yet morning breaks, the Pearl remains,<br>
+            Defying physics, tides, and rains.<br>
+            A testament to foolish pride<br>
+            Or something stronger still inside?<br>
+            <br>
+            So here we watch, we wait, we see—<br>
+            This battle 'tween the house and sea.
+        </div>
     </div>
 
-    <div class="footer">A Vigil · Est. 2025</div>
+    <div class="footer">Est. 2025</div>
 
     <script>
         // 🏖️ CONFIGURATION: Change STILL_STANDING to false when the house falls into the ocean!
